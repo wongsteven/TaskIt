@@ -43,7 +43,7 @@ class AddTaskViewController: UIViewController {
     
         let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
         
-        let managedObjectContext = appDelegate.managedObjectContext
+        let managedObjectContext = ModelManager.instance.managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: managedObjectContext!)
         let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         task.task = taskTextField.text
@@ -51,7 +51,7 @@ class AddTaskViewController: UIViewController {
         task.date = dueDatePicker.date
         task.completed = false
         
-        appDelegate.saveContext()
+        ModelManager.instance.saveContext()
         
         var request = NSFetchRequest(entityName: "TaskModel")
         var error:NSError? = nil
